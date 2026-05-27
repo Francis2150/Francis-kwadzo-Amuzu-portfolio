@@ -368,7 +368,7 @@ modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); }
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
 
 // ============================================
-// Contact Form
+// Contact Form (Formspree)
 // ============================================
 const contactForm = document.getElementById('contactForm');
 const toast = document.getElementById('toast');
@@ -380,22 +380,31 @@ function showToast(message) {
     setTimeout(() => toast.classList.remove('show'), 4000);
 }
 
-contactForm.addEventListener('submit', (e) => {
+contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-    if (!name || !email || !message) { showToast('Please fill in all fields.'); return; }
     const submitBtn = contactForm.querySelector('.form-submit');
     submitBtn.innerHTML = '<span style="display:inline-flex;align-items:center;gap:8px;"><span class="loader-spinner" style="width:18px;height:18px;border-width:2px;"></span> Sending...</span>';
     submitBtn.disabled = true;
-    setTimeout(() => {
-        showToast("Message sent successfully! I'll get back to you soon.");
-        contactForm.reset();
-        submitBtn.innerHTML = '<i data-lucide="send" style="width:18px;height:18px;"></i> Send Message';
-        submitBtn.disabled = false;
-        lucide.createIcons();
-    }, 1500);
+
+    try {
+        const response = await fetch(contactForm.action, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+            showToast("Message sent successfully! I'll get back to you soon.");
+            contactForm.reset();
+        } else {
+            showToast('Oops! Something went wrong. Please try again.');
+        }
+    } catch (error) {
+        showToast('Network error. Please check your connection.');
+    }
+
+    submitBtn.innerHTML = '<i data-lucide="send" style="width:18px;height:18px;"></i> Send Message';
+    submitBtn.disabled = false;
+    lucide.createIcons();
 });
 
 
