@@ -11,7 +11,7 @@ const projectsData = [
         title: "Accounting Record Management System",
         tag: "Finance • Web App",
         category: "finance web",
-        image: "https://picsum.photos/seed/acct-rec-sys/800/500.jpg",
+        image: "pos.PNG",
         description: "Designed and developed a web-based application for small enterprises to manage and track financial records. Implemented features for organized record storage, real-time financial tracking, and automated data management. Replaces manual financial tracking with a digital solution that improves record retrieval efficiency and reduces errors.",
         techs: ["HTML", "CSS", "JavaScript", "LocalStorage"],
         github: "https://github.com/Francis2150",
