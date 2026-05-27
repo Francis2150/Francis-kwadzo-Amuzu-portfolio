@@ -398,16 +398,21 @@ contactForm.addEventListener('submit', (e) => {
     }, 1500);
 });
 
+
 // ============================================
-// Download CV
+// Download / View CV
 // ============================================
 document.getElementById('downloadCV').addEventListener('click', (e) => {
     e.preventDefault();
-    showToast('CV download will be available soon! 📄');
+    window.open('Amuzu_Francis_Kwadzo-CV.pdf', '_blank');
 });
 document.getElementById('downloadCVFooter').addEventListener('click', (e) => {
     e.preventDefault();
-    showToast('CV download will be available soon! 📄');
+    window.open('Amuzu_Francis_Kwadzo-CV.pdf', '_blank');
+});
+document.getElementById('viewCV').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.open('https://docs.google.com/document/d/1NrbQpWXIb9BFskUqhToBA6SJzYoCSb5TXozIOIHSwBM/edit?usp=sharing', '_blank');
 });
 
 // ============================================
